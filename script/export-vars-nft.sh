@@ -1,9 +1,10 @@
+#!/bin/bash
+
+wallet_dir=${wallet_dir?Set wallet_dir to your Cardano wallet dir (must have payment.addr)}
 
 export app_vk=$(charms app vk)
 export in_utxo_0="3ba4c00dc0041226f456ac694a4317f9e013a8b47a3d6ec326c5b1dd110ef20c:0"
 export app_id=$(echo -n "${in_utxo_0}" | sha256sum | cut -d' ' -f1)
-
-wallet_dir=/Users/ivan/src/sigma0-dev/charms-cardano-wallet-data/cardano-wallets/charms-preprod
 
 export addr_0=$(cat ${wallet_dir}/payment.addr)
 
