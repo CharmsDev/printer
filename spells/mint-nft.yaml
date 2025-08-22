@@ -3,9 +3,7 @@ version: 6
 apps:
   $00: n/${app_id}/${app_vk}
 
-ins:
-  - utxo_id: ${in_utxo_0}
-    charms: {}
+ins: []
 
 outs:
   - address: ${addr_0}
