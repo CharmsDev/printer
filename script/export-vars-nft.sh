@@ -1,6 +1,11 @@
 #!/bin/bash
 
+## Use from the project root dir:
+## . ./script/export-vars-nft.sh
+
 wallet_dir=${wallet_dir?Set wallet_dir to your Cardano wallet dir (must have payment.addr)}
+
+mkdir -p ./tmp
 
 export app_vk=$(charms app vk)
 export in_utxo_0="3ba4c00dc0041226f456ac694a4317f9e013a8b47a3d6ec326c5b1dd110ef20c:0"
