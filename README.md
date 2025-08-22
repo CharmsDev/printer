@@ -1,29 +1,25 @@
-This is a [Charms](https://charms.dev) app.
+# printer
 
-It is a simple fungible token managed by a reference NFT. The NFT has a state that specifies the remaining total supply of the tokens available to mint. If you control the NFT, you can mint new tokens.
+Print like the Fed.
 
-Build with:
-```sh
-charms app build
+Here are a few commands to get started:
+
+0) build charms from source https://github.com/CharmsDev/charms:
+```bash
+cargo install --profile=test --path . --locked --bin charms
 ```
 
-The resulting Wasm binary will show up at `./target/wasm32-wasip1/release/printer.wasm`.
-
-Get the verification key for the app with:
-```sh
-charms app vk
+1) In the `printer` repo root dir, run:
+```bash
+. ./script/export-vars-nft.sh
 ```
 
-Test the app with a simple NFT mint example:
+If it prints an error about wallet_dir, set `wallet_dir` and run again.
 
-```sh
-export app_vk=$(charms app vk)
+2) Now you're ready to prove a spell:
 
-# set to a UTXO you're spending (you can see what you have by running `b listunspent`)
-export in_utxo_0="a2889190343435c86cd1c2b70e58efed0d101437a753e154dff1879008898cd2:2"
-
-export app_id=$(echo -n "${in_utxo_0}" | sha256sum | cut -d' ' -f1)
-export addr_0="tb1p3w06fgh64axkj3uphn4t258ehweccm367vkdhkvz8qzdagjctm8qaw2xyv"
-
-cat ./spells/mint-nft.yaml | envsubst | charms app run
+```bash
+cat ./spells/mint-nft.yaml | envsubst | charms spell prove --app-bins=$app_bins --prev-txs=$prev_txs --funding-utxo=$funding_utxo --funding-utxo-value=$funding_utxo_value --change-address=$change_address --chain=cardano --mock > ./tmp/tx.draft.json
 ```
+
+This will create ./tmp/tx.draft.json which can be signed and submitted to the Cardano network.
