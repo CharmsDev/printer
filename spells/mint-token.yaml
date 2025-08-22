@@ -1,0 +1,13 @@
+version: 6
+
+apps:
+  $01: t/${app_id}/${app_vk}
+
+ins:
+  - utxo_id: ${in_utxo_1}
+    charms: {}
+
+outs:
+  - address: ${addr_1}
+    charms:
+      $01: 69420
